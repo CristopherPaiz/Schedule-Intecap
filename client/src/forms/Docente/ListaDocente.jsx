@@ -169,7 +169,11 @@ const ListaDocente = ({ data }) => {
                 <Avatar
                   showFallback
                   color="primary"
-                  fallback={(row?.nombre + " " + row?.apellido ?? "")
+                  fallback={(
+                    row?.nombre.replace(/^\s+|\s+$/g, "").trim() +
+                      " " +
+                      row?.apellido.replace(/^\s+|\s+$/g, "").trim() ?? ""
+                  )
                     .split(" ")
                     .map((palabra) => palabra[0].toUpperCase())
                     .join("")}
@@ -202,8 +206,7 @@ const ListaDocente = ({ data }) => {
               <ModalHeader className="flex flex-col gap-1">{usuarioSeleccionado?.nombre ?? ""}</ModalHeader>
               <ModalBody>
                 <h1 className="font-bold text-center text-xl text-gray-500">
-                  {"Información sobre " + usuarioSeleccionado?.nombre + " " + usuarioSeleccionado?.apellido ??
-                    ""}
+                  {"Información sobre " + usuarioSeleccionado?.nombre + " " + usuarioSeleccionado?.apellido ?? ""}
                 </h1>
                 <div className="flex flex-col gap-2 mt-4 w-full mx-auto">
                   <Input
@@ -268,11 +271,7 @@ const ListaDocente = ({ data }) => {
                         onChange={setCursosSeleccionados}
                       >
                         {usuarioSeleccionado?.cursos?.map((curso, index) => (
-                          <Checkbox
-                            value={curso}
-                            key={index}
-                            className="bg-slate-200 p-3 pr-8 m-1 rounded-lg"
-                          >
+                          <Checkbox value={curso} key={index} className="bg-slate-200 p-3 pr-8 m-1 rounded-lg">
                             <h2>
                               <span className="font-bold">Nombre:</span> {curso?.nombre ?? ""}
                             </h2>
