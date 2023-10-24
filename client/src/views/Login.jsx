@@ -64,7 +64,7 @@ const Login = () => {
               alt="logo"
             />
           </a>
-          <div className="p-6 space-y-4">
+          <form className="p-6 space-y-4">
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Iniciar Sesión
             </h1>
@@ -86,9 +86,7 @@ const Login = () => {
                 />
               </div>
               <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Contraseña
-                </label>
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
                 <input
                   type="password"
                   name="password"
@@ -102,12 +100,14 @@ const Login = () => {
               </div>
               <Button
                 onClick={obtenerTipoUsuario}
+                type="submit"
+                onSubmit={obtenerTipoUsuario}
                 className="w-full text-white bg-[#0075bf] hover:bg-[#0075bf]/[0.7] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800"
               >
                 Iniciar sesión
               </Button>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </>
