@@ -64,7 +64,7 @@ const Login = () => {
               alt="logo"
             />
           </a>
-          <form className="p-6 space-y-4">
+          <div className="p-6 space-y-4">
             <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Iniciar Sesión
             </h1>
@@ -100,13 +100,12 @@ const Login = () => {
               <Button
                 onClick={obtenerTipoUsuario}
                 type="submit"
-                onSubmit={obtenerTipoUsuario}
                 className="w-full text-white bg-[#0075bf] hover:bg-[#0075bf]/[0.7] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800"
               >
                 Iniciar sesión
               </Button>
             </div>
-          </form>
+          </div>
         </div>
       </section>
     </>
