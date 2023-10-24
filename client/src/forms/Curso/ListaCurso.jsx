@@ -108,7 +108,7 @@ const ListaCurso = ({ data }) => {
                 <Avatar
                   showFallback
                   color="success"
-                  fallback={(row?.nombre ?? "")
+                  fallback={(row?.nombre.replace(/^\s+|\s+$/g, "").trim() ?? "")
                     .split(" ")
                     .map((palabra) => palabra[0].toUpperCase())
                     .join("")}

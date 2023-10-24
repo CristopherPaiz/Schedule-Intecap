@@ -115,7 +115,7 @@ const ListaTaller = ({ data }) => {
                 <Avatar
                   showFallback
                   color="secondary"
-                  fallback={(row?.nombre ?? "")
+                  fallback={(row?.nombre.replace(/^\s+|\s+$/g, "").trim() ?? "")
                     .split(" ")
                     .map((palabra) => palabra[0].toUpperCase())
                     .join("")}

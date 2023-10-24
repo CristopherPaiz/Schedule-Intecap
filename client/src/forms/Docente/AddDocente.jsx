@@ -29,7 +29,7 @@ const AddDocente = () => {
   const [usuarios, setUsuarios] = useState(null);
 
   function generarPassword() {
-    const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+    const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!";
     let password = "";
 
     for (let i = 0; i < 6; i++) {
