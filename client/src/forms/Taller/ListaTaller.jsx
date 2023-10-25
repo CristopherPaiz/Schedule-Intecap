@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { format, addDays } from "date-fns";
 import {
   Input,
   Table,
@@ -16,11 +15,10 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Select,
-  SelectItem,
   Popover,
   PopoverTrigger,
   PopoverContent,
+  Textarea,
 } from "@nextui-org/react";
 import API_URL from "../../config.js";
 import toast, { Toaster } from "react-hot-toast";
@@ -39,11 +37,13 @@ const ListaTaller = ({ data }) => {
   const [nombre, setNombre] = useState("");
   const [salon, setSalon] = useState("");
   const [capacidad, setCapacidad] = useState("");
+  const [observaciones, setObservaciones] = useState("");
 
   const ActualizarDatos = (datos) => {
     setNombre(datos?.nombre ?? "");
     setSalon(datos?.salon ?? "");
     setCapacidad(datos?.capacidad ?? "");
+    setObservaciones(datos?.observaciones ?? "");
   };
 
   const ActualizarDatosServer = async () => {
@@ -51,6 +51,7 @@ const ListaTaller = ({ data }) => {
       nombre: nombre,
       salon: salon,
       capacidad: capacidad,
+      observaciones: observaciones,
     };
     try {
       const response = await fetch(`${API_URL}/taller/update/${tallerSeleccionado?._id}`, {
@@ -173,6 +174,14 @@ const ListaTaller = ({ data }) => {
                     defaultValue={tallerSeleccionado?.capacidad ?? ""}
                     value={capacidad}
                     onValueChange={setCapacidad}
+                  />
+                  <Textarea
+                    label="Observaciones"
+                    type="text"
+                    placeholder="Observarciones"
+                    defaultValue={tallerSeleccionado?.observaciones ?? ""}
+                    value={observaciones}
+                    onValueChange={setObservaciones}
                   />
                 </div>
               </ModalBody>
