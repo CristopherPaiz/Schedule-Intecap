@@ -230,7 +230,7 @@ const AddCurso = () => {
     } else {
       setDocenteValidado(true);
     }
-  }, [fechaFinal, fechaInicio, horarioFinal, horarioInicio, dias]);
+  }, [fechaFinal, fechaInicio, horarioFinal, horarioInicio, dias, docenteSeleccionado, tallerSeleccionado]);
 
   //UseEffect que se habilita hasta que se haya seleccionado por lo menos algún docente
   useEffect(() => {
@@ -308,31 +308,38 @@ const AddCurso = () => {
         throw new Error(data.message);
       }
 
-      // DISPONIBILIDAD TALLER
-      const responseTaller = await fetch(`${API_URL}/user/comprobarDisponibilidadPorTaller`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datos),
-        credentials: "include",
-      });
-
-      const dataTaller = await responseTaller.json();
-      //recibir los mensajes de error del servidor
-      if (!dataTaller.disponible) {
-        setMensajeError(dataTaller);
-        onOpen();
-        setLoading(false);
-        setTexto("Verificar disponibilidad de horario");
+      if (datos.nombreTaller === "No Aplica (Virtual, Externo, Otros)") {
         setValidadoDocente(false);
-        throw new Error(dataTaller.message);
-      }
+        setValidadoTaller(false);
+        setLoading(false);
+        setTexto("¡Disponible");
+      } else {
+        // DISPONIBILIDAD TALLER
+        const responseTaller = await fetch(`${API_URL}/user/comprobarDisponibilidadPorTaller`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datos),
+          credentials: "include",
+        });
 
-      setValidadoDocente(false);
-      setValidadoTaller(false);
-      setLoading(false);
-      setTexto("¡Disponible");
+        const dataTaller = await responseTaller.json();
+        //recibir los mensajes de error del servidor
+        if (!dataTaller.disponible) {
+          setMensajeError(dataTaller);
+          onOpen();
+          setLoading(false);
+          setTexto("Verificar disponibilidad de horario");
+          setValidadoDocente(false);
+          return;
+          // throw new Error(dataTaller.message);
+        }
+        setValidadoDocente(false);
+        setValidadoTaller(false);
+        setLoading(false);
+        setTexto("¡Disponible");
+      }
     } catch (error) {
       console.log(error);
     }

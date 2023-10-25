@@ -31,6 +31,19 @@ router.post("/taller/add", async (req, res) => {
 router.get("/taller/getall", async (req, res) => {
   try {
     const data = await Taller.find().sort({ nombre: 1 }).where({ estado: true });
+
+    const noAplica = {
+      _id: "0",
+      nombre: "No Aplica (Virtual, Externo, Otros)",
+      salon: "No Aplica",
+      capacidad: "No Aplica",
+      observaciones: "No Aplica",
+      estado: true,
+    };
+
+    // Agregar el Taller "No Aplica" al inicio del array
+    data.unshift(noAplica);
+
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
