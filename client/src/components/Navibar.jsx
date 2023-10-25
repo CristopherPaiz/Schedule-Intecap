@@ -53,9 +53,9 @@ const Navibar = () => {
           </NavbarContent>
           <NavbarContent className="hidden sm:flex gap-1 md:ml-6" justify="center">
             <NavbarItem>
-              <Button className="bg-transparent hover:bg-success-100" variant="flat">
-                <RouterLink to={"/miscursos"} className="py-2 -mx-3 px-3 flex gap-1">
-                  Mis Cursos
+              <Button className="bg-transparent hover:bg-secondary-100" variant="flat">
+                <RouterLink to={"/cursosDocentes"} className="py-2 -mx-3 px-3 flex gap-1">
+                  Cursos Docentes
                 </RouterLink>
               </Button>
             </NavbarItem>

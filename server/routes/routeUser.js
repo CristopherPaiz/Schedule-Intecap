@@ -48,6 +48,30 @@ router.get("/user/getall", async (req, res) => {
   }
 });
 
+// ======= obtener todos los usuarios =======
+router.get("/user/getallLabel", async (req, res) => {
+  try {
+    const usuarios = await Usuario.find({}, "nombre apellido").where({
+      estado: true,
+    }); // Proyecta solo nombre y apellido
+
+    // Mapear los resultados para cambiar el nombre de los campos
+    const usuariosTransformados = usuarios.map((usuario) => {
+      return {
+        label: usuario.nombre + " " + usuario.apellido,
+        value: usuario._id,
+      };
+    });
+
+    res.status(200).json(usuariosTransformados);
+  } catch (error) {
+    res.status(500).json({
+      messageDev: "No se pudo obtener a los usuarios",
+      messageSys: error.message,
+    });
+  }
+});
+
 // ======= obtener un usuario por su username =======
 router.post("/user/getbyusername", async (req, res) => {
   try {
