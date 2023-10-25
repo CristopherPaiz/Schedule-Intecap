@@ -12,6 +12,9 @@ const tallerDocenteSchema = new Schema({
   capacidad: {
     type: Number,
   },
+  observaciones: {
+    type: String,
+  },
   estado: {
     type: Boolean,
     default: true,

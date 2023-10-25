@@ -5,11 +5,12 @@ const Taller = require("../models/tallerDocente.js");
 //======= crear un nuevo Taller =======
 router.post("/taller/add", async (req, res) => {
   try {
-    const { nombre, salon, capacidad, estado } = req.body;
+    const { nombre, salon, capacidad, observaciones, estado } = req.body;
     const taller = new Taller({
       nombre,
       salon,
       capacidad,
+      observaciones,
       estado,
     });
 

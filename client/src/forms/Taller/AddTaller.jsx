@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Input, Button } from "@nextui-org/react";
+import React, { useState, useContext } from "react";
+import { Input, Button, Textarea } from "@nextui-org/react";
 import toast, { Toaster } from "react-hot-toast";
 import API_URL from "../../config.js";
 import { contexto } from "../../context/ContextProvider.jsx";
@@ -9,6 +9,7 @@ const AddTaller = () => {
   const [nombre, setNombre] = useState("");
   const [salon, setSalon] = useState("");
   const [capacidad, setCapacidad] = useState(0);
+  const [observaciones, setObservaciones] = useState("");
   const { setTaller, taller } = useContext(contexto);
 
   const handleSubmit = async () => {
@@ -20,6 +21,7 @@ const AddTaller = () => {
       nombre,
       salon,
       capacidad,
+      observaciones,
     };
 
     try {
@@ -42,6 +44,7 @@ const AddTaller = () => {
       setNombre("");
       setSalon("");
       setCapacidad(0);
+      setObservaciones("");
     } catch (error) {
       toast.error("Error al añadir el taller" + error);
     }
@@ -72,6 +75,13 @@ const AddTaller = () => {
           placeholder="Ingrese la capacidad de estudiantes"
           value={capacidad}
           onValueChange={setCapacidad}
+        />
+        <Textarea
+          type="text"
+          label="Observaciones"
+          placeholder="Observaciones"
+          value={observaciones}
+          onValueChange={setObservaciones}
         />
       </div>
       <Button onClick={handleSubmit} color="secondary" className="w-11/12 m-auto sm:w-3/5 text-white">
