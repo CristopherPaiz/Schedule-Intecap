@@ -18,6 +18,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Textarea,
 } from "@nextui-org/react";
 import toast, { Toaster } from "react-hot-toast";
 import { Navigate } from "react-router-dom";
@@ -29,6 +30,7 @@ const AddCurso = () => {
   //UseState de todos los campos del formulario
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
+  const [codigoCurso, setCodigoCurso] = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFinal, setFechaFinal] = useState("");
   const [horarioInicio, setHorarioInicio] = useState("");
@@ -160,6 +162,7 @@ const AddCurso = () => {
 
     const datos = {
       nombre,
+      codigoCurso: codigoCurso,
       descripcion,
       fechaInicio,
       fechaFinal,
@@ -214,6 +217,7 @@ const AddCurso = () => {
       setValueDocente(new Set([]));
       setTallerSeleccionado("");
       setDocenteSeleccionado("");
+      setCodigoCurso("");
     } catch (error) {
       toast.error("Error al añadir el curso" + error);
     }
@@ -332,8 +336,7 @@ const AddCurso = () => {
           setLoading(false);
           setTexto("Verificar disponibilidad de horario");
           setValidadoDocente(false);
-          return;
-          // throw new Error(dataTaller.message);
+          throw new Error(dataTaller.message);
         }
         setValidadoDocente(false);
         setValidadoTaller(false);
@@ -358,11 +361,19 @@ const AddCurso = () => {
           onValueChange={setNombre}
         />
         <Input
+          label="Código del curso"
+          isRequired
+          placeholder="Ingrese el código del curso"
+          value={codigoCurso}
+          onValueChange={setCodigoCurso}
+        />
+        <Textarea
           label="Descripción"
           placeholder="Ingrese una descripción"
           value={descripcion}
           onValueChange={setDescripcion}
         />
+        <div className="hidden sm:flex"></div>
         <Input
           type="date"
           placeholder="Fecha Inicio"

@@ -5,10 +5,12 @@ const Curso = require("../models/cursosModel.js");
 //======= crear un nuevo Curso =======
 router.post("/curso/add", async (req, res) => {
   try {
-    const { nombre, descripcion, fechaInicio, fechaFinal, horario, taller, docente, dias, foto, estado } = req.body;
+    const { nombre, codigoCurso, descripcion, fechaInicio, fechaFinal, horario, taller, docente, dias, foto, estado } =
+      req.body;
 
     const curso = new Curso({
       nombre,
+      codigoCurso,
       descripcion,
       fechaInicio,
       fechaFinal,

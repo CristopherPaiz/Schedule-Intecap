@@ -20,6 +20,7 @@ import {
   PopoverTrigger,
   Chip,
   PopoverContent,
+  Textarea,
 } from "@nextui-org/react";
 import API_URL from "../../config.js";
 import toast, { Toaster } from "react-hot-toast";
@@ -80,7 +81,9 @@ const ListaCurso = ({ data }) => {
       <Toaster />
       <Table isStriped>
         <TableHeader>
-          <TableColumn className="font-bold text-lg">Ícono</TableColumn>
+          <TableColumn className="font-bold text-lg" width={3}>
+            Código
+          </TableColumn>
           <TableColumn className="font-bold text-lg">Nombre Curso</TableColumn>
           <TableColumn className="font-bold text-lg" width={100}>
             Duración
@@ -97,7 +100,7 @@ const ListaCurso = ({ data }) => {
           <TableColumn className="font-bold text-lg" width={150}>
             Docente
           </TableColumn>
-          <TableColumn className="font-bold text-lg text-center" align="center">
+          <TableColumn className="font-bold text-lg text-center" align="center" width={3}>
             Ver
           </TableColumn>
         </TableHeader>
@@ -105,14 +108,9 @@ const ListaCurso = ({ data }) => {
           {data.map((row, rowIndex) => (
             <TableRow key={rowIndex}>
               <TableCell>
-                <Avatar
-                  showFallback
-                  color="success"
-                  fallback={(row?.nombre.replace(/^\s+|\s+$/g, "").trim() ?? "")
-                    .split(" ")
-                    .map((palabra) => palabra[0].toUpperCase())
-                    .join("")}
-                />
+                <div className=" w-24 justify-center rounded-md">
+                  <p className="overflow-hidden text-ellipsis font-bold whitespace-nowrap">{row?.codigoCurso}</p>
+                </div>
               </TableCell>
               <TableCell>{row?.nombre ?? ""}</TableCell>
               <TableCell>
@@ -193,6 +191,13 @@ const ListaCurso = ({ data }) => {
                     defaultValue={cursoSeleccionado?.nombre ?? ""}
                   />
                   <Input
+                    label="Código"
+                    type="text"
+                    isDisabled
+                    placeholder="Código"
+                    defaultValue={cursoSeleccionado?.codigoCurso ?? ""}
+                  />
+                  <Textarea
                     label="Descripción"
                     isDisabled
                     type="text"

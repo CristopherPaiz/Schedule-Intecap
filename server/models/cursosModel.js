@@ -6,6 +6,10 @@ const cursoSchema = new Schema({
     type: String,
     require: true,
   },
+  codigoCurso: {
+    type: String,
+    require: true,
+  },
   descripcion: {
     type: String,
     require: true,

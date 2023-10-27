@@ -44,7 +44,7 @@ app.use(
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.send("Api Intecap Schedule!");
+  res.send("Api Intecap Schedule!!");
 });
 
 //usamos siempre el formato de JSON
