@@ -53,6 +53,20 @@ router.get("/taller/getall", async (req, res) => {
   }
 });
 
+// ======= obtener todos los Tallers =======
+router.get("/taller/getallSinNoAplica", async (req, res) => {
+  try {
+    const data = await Taller.find().sort({ nombre: 1 }).where({ estado: true });
+
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({
+      messageDev: "No se pudo obtener los Talleres",
+      messageSys: error.message,
+    });
+  }
+});
+
 // ======= obtener un Taller por su username =======
 router.post("/taller/getbyid", async (req, res) => {
   try {

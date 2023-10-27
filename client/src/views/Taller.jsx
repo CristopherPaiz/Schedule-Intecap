@@ -16,7 +16,7 @@ const Taller = () => {
 
   const obtenerTaller = async () => {
     try {
-      const response = await fetch(`${API_URL}/taller/getall`, {
+      const response = await fetch(`${API_URL}/taller/getallSinNoAplica`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
